@@ -49,6 +49,23 @@ img {
   border-radius: 15px;
   margin-top: 15px;
 }
+  .heart {
+  position: fixed;
+  top: -10px;
+  color: rgba(255,255,255,0.8);
+  font-size: 20px;
+  animation: fall linear infinite;
+  z-index: 0;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
+  .container, body > div {
+  z-index: 1;
+  }
   p {
   white-space: pre-line;
   }
@@ -220,6 +237,23 @@ function endApp() {
   document.getElementById("message2").style.display = "none";
   document.getElementById("end").style.display = "block";
 }
+  function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "💖";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (15 + Math.random() * 20) + "px";
+  heart.style.animationDuration = (3 + Math.random() * 5) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 8000);
+}
+
+setInterval(createHeart, 500);
 
 </script>
 
