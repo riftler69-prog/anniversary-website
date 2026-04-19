@@ -29,7 +29,21 @@ p {
   max-width: 90%;
   margin: auto;
 }
+  .center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  }
+.center {
+  animation: fadeIn 1s ease;
+}
 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 /* TOMBOL */
 button {
   padding: 15px 25px;
@@ -85,7 +99,8 @@ img {
 </div>
 
 <!-- STEP 2 -->
-<div id="message1" class="hidden">
+<div id="message1" class="hidden
+  center">
   <p id="typing1"></p>
   <button onclick="startQuiz()">Aku sudah membaca</button>
 </div>
@@ -108,7 +123,8 @@ img {
 </div>
 
 <!-- PESAN AKHIR -->
-<div id="message2" class="hidden">
+<div id="message2" class="hidden
+  center">
   <p id="typing2"></p>
   <button onclick="endApp()">Okeee ❤️</button>
 </div>
