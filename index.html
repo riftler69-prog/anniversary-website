@@ -12,17 +12,42 @@ body {
   color: white;
   padding: 20px;
 }
+
+/* BIAR RAPI DI HP */
 .hidden { display: none; }
-button {
-  padding: 10px 20px;
-  margin-top: 15px;
-  border: none;
-  border-radius: 10px;
+
+/* JUDUL */
+h1 {
+  font-size: 32px;
 }
+
+/* TEKS UTAMA */
+p {
+  white-space: pre-line;
+  font-size: 18px;
+  line-height: 1.8;
+  max-width: 90%;
+  margin: auto;
+}
+
+/* TOMBOL */
+button {
+  padding: 15px 25px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  background: white;
+  color: #ff4f8b;
+  font-weight: bold;
+}
+
+/* FOTO */
 img {
-  width: 250px;
+  width: 90%;
+  max-width: 300px;
   border-radius: 15px;
-  margin-top: 10px;
+  margin-top: 15px;
 }
   p {
   white-space: pre-line;
@@ -104,9 +129,9 @@ function type1() {
 
 // ===== QUIZ =====
 let quiz = [
-  {q:"Tanggal jadian kita?", a:["1 Jan","14 Feb","10 Mar"], c:1},
-  {q:"Tempat pertama ketemu?", a:["Sekolah","Cafe","Mall"], c:0},
-  {q:"Makanan favorit?", a:["Bakso","Ayam","Mie"], c:2},
+  {q:"tempat pertama ketemu?", a:["Instagram","Telegram","Michat"], c:1},
+  {q:"tempat 2 tahun ini dimulai", a:["Telegram","Instagram","Tiktok"], c:0},
+  {q:"gambar ikonik kita", a:["Naga","Titit","Bintang"], c:2},
   {q:"Siapa paling sayang?", a:["Aku","Kamu","Kita ❤️"], c:2},
   {q:"Aku itu apa?", a:["Teman","Pacar","Segalanya ❤️"], c:2}
 ];
@@ -147,10 +172,10 @@ function answer(i) {
 
 // ===== FOTO =====
 let photos = [
-  {img:"foto1.jpg", text:"Kenangan kita ❤️"},
-  {img:"foto2.jpg", text:"Moment bahagia 💕"},
-  {img:"foto3.jpg", text:"Aku suka ini 😍"},
-  {img:"foto4.jpg", text:"Favoritku ❤️"}
+  {img:"foto1.jpg", text:"first pap uwu ❤️"},
+  {img:"foto2.jpg", text:"pap paling imup 💕"},
+  {img:"foto3.jpg", text:"first pap nakal 😍"},
+  {img:"foto4.jpg", text:"filter paling cans ❤️"}
 ];
 
 let p = 0;
