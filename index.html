@@ -5,55 +5,52 @@
 <title>Untuk Kamu ❤️</title>
 
 <style>
-body {
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY FIX */
+body {
   font-family: Arial;
-  overflow: hidden; /* MATIIN SCROLL */
-  background: linear-gradient(to right, #ff758c, #ff7eb3);
+  overflow: hidden; /* NO SCROLL */
+  height: 100vh;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
   color: white;
 }
 
-/* SEMUA STEP FULL SCREEN */
+/* FULL SCREEN STEP */
 .step {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: absolute;
   width: 100%;
   height: 100vh;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   text-align: center;
-
-  opacity: 0;
-  transform: translateY(100%);
-  transition: 0.6s;
+  padding: 20px;
 }
 
-/* STEP AKTIF */
 .active {
-  opacity: 1;
-  transform: translateY(0);
-  z-index: 2;
+  display: flex;
 }
 
-/* TEKS */
+/* TEXT */
 p {
   white-space: pre-line;
   font-size: 18px;
   line-height: 1.8;
-  padding: 20px;
   max-width: 600px;
 }
 
-/* TOMBOL */
+/* BUTTON */
 button {
-  padding: 15px 25px;
   margin-top: 20px;
+  padding: 14px 25px;
   border: none;
   border-radius: 12px;
-  font-size: 16px;
   background: white;
   color: #ff4f8b;
   font-weight: bold;
@@ -67,11 +64,11 @@ img {
   margin-top: 10px;
 }
 
-/* LOVE */
+/* HEART */
 .heart {
   position: fixed;
   top: -10px;
-  font-size: 20px;
+  color: rgba(255,255,255,0.8);
   animation: fall linear infinite;
   z-index: 0;
 }
@@ -89,92 +86,71 @@ img {
 </audio>
 
 <!-- STEP 1 -->
-<div id="step1" class="step active">
+<div id="start" class="step active">
   <h1>Tap ❤️</h1>
-  <button onclick="next(2)">Tap</button>
+  <button onclick="next('message1')">Tap</button>
 </div>
 
 <!-- STEP 2 -->
-<div id="step2" class="step">
+<div id="message1" class="step">
   <p id="typing1"></p>
-  <button onclick="next(3)">Aku sudah membaca</button>
+  <button onclick="next('quiz')">Aku sudah membaca</button>
 </div>
 
-<!-- STEP 3 QUIZ -->
-<div id="step3" class="step">
+<!-- QUIZ -->
+<div id="quiz" class="step">
   <p id="question"></p>
   <div id="answers"></div>
 </div>
 
-<!-- STEP 4 -->
-<div id="step4" class="step">
-  <button onclick="next(5)">Aku pinter 😆</button>
+<!-- AFTER QUIZ -->
+<div id="afterQuiz" class="step">
+  <button onclick="next('photos')">Aku pinter 😆</button>
 </div>
 
-<!-- STEP 5 FOTO -->
-<div id="step5" class="step">
+<!-- FOTO -->
+<div id="photos" class="step">
   <div id="photoBox"></div>
-  <button onclick="next(6)">Aku sudah liat</button>
+  <button onclick="next('message2')">Aku sudah liat</button>
 </div>
 
-<!-- STEP 6 -->
-<div id="step6" class="step">
+<!-- PESAN 2 -->
+<div id="message2" class="step">
   <p id="typing2"></p>
-  <button onclick="next(7)">Okeee ❤️</button>
+  <button onclick="next('end')">Okeee ❤️</button>
 </div>
 
-<!-- STEP 7 -->
-<div id="step7" class="step">
-  <h2>Aku sayang kamu ❤️</h2>
+<!-- END -->
+<div id="end" class="step">
+  <h2>I LOVE YOU ❤️</h2>
 </div>
 
 <script>
 
-// PINDAH STEP
-function next(n) {
-  document.querySelectorAll(".step").forEach(s => {
-    s.classList.remove("active");
-  });
+// ===== NAVIGATION =====
+function next(id) {
+  document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
 
-  const target = document.getElementById("step" + n);
-  target.classList.add("active");
-
-  // RESET TYPING BIAR GA KOSONG
-  if(n === 2){
-    document.getElementById("typing1").innerHTML = "";
-    i = 0;
+  if(id === "message1") {
     document.getElementById("music").play();
     type1();
   }
-
-  if(n === 3){
-    loadQuiz();
-  }
-
-  if(n === 5){
-    showPhotos();
-  }
-
-  if(n === 6){
-    document.getElementById("typing2").innerHTML = "";
-    j = 0;
-    type2();
-  }
+  if(id === "quiz") loadQuiz();
+  if(id === "photos") showPhotos();
+  if(id === "message2") type2();
 }
 
-// ===== TYPING 1 =====
+// ===== TEXT 1 =====
 let text1 = ">_< HAPPY ANNIVERSARY 2nd SAYAANGG >_<\n\n" +
-
-"actually aku ga menyangka bgtt kita bisa sejauh ini, two years is a very long time, bukan hal mudah untuk kita sampai di titik ini, titik dimana kita benar benar sudah melewati banyak hal, happyness, sadness, dan emosional yg kita lalui bersama, 2 tahun bukanlah waktu yg sebentar, kita menghabiskan banyak energi untuk saling memahami masing-masing, dan alangkah beruntungnya kita, kita bisa melalui segala halang rintang yg harus jadi kendala.\n\n" +
-
-"I wish, setelah kita mencapai titik ini, kita menjadi lebih kuat, lebih saling memegang erat.\n\n" +
-
-"I hope, setelah banyak fase yg kita lalui, kita bisa belajar banyak hal, bagaimana cara menyikapi kesalah pahaman yg masing masing kita perbuat.\n\n" +
-
+"actually aku ga menyangka bgtt kita bisa sejauh ini, two years is a very long time, bukan hal mudah untuk kita sampai di titik ini, titik dimana kita benar benar sudah melewati banyak hal, happyness, sadness, dan emosional yg kita lalui bersama, 2 tahun bukanlah waktu yg sebentar, kita menghabiskan banyak energi untuk saling memahami masing-masing, dan alangkah beruntungnya kita, kita bisa melalui segala halang rintang yg harus jadi kendala\n\n" +
+"I wish, setelah kita mencapai titik ini, kita menjadi lebih kuat, lebih saling memegang erat\n\n" +
+"I hope, setelah banyak fase yg kita lalui, kita bisa belajar banyak hal, bagaimana cara menyikapi kesalah pahaman yg masing masing kita perbuat\n\n" +
 "i want, we are still together, aku berharap bgtt apa yg kita mulai, akan berakhir dengan apa yg kita inginkan ❤️";
+
 let i = 0;
 function type1() {
-  if (i < text1.length) {
+  if(i < text1.length){
     typing1.innerHTML += text1[i];
     i++;
     setTimeout(type1, 40);
@@ -183,16 +159,15 @@ function type1() {
 
 // ===== QUIZ =====
 let quiz = [
-  {q:"Tempat pertama ketemu?", a:["Instagram","Telegram","Michat"], c:1},
-  {q:"Tempat kita balikan?", a:["Whatsapp","Instagram","Tiktok"], c:0},
-  {q:"Gambar iconik kita?", a:["Naga","Bintang","Hati ❤️"], c:2},
-  {q:"Siapa paling sayang?", a:["Aku","Kamu","Kita ❤️"], c:2},
-  {q:"Aku itu apa?", a:["Teman","Pacar","Segalanya ❤️"], c:2}
+  {q:"tempat pertama ketemu?", a:["Instagram","Telegram","Michat"], c:1},
+  {q:"tempat 2 tahun ini dimulai", a:["Whatsapp","Instagram","Tiktok"], c:0},
+  {q:"gambar ikonik kita", a:["Naga","Titit","Bintang"], c:2},
+  {q:"Siapa paling sayang?", a:["Aku","Kamu","Kita ❤️"], c:2}
 ];
 
 let current = 0;
 
-function loadQuiz() {
+function loadQuiz(){
   let q = quiz[current];
   question.innerText = q.q;
 
@@ -200,7 +175,6 @@ function loadQuiz() {
   q.a.forEach((ans,i)=>{
     html += `<button onclick="answer(${i})">${ans}</button><br>`;
   });
-
   answers.innerHTML = html;
 }
 
@@ -210,50 +184,39 @@ function answer(i){
     if(current < quiz.length){
       loadQuiz();
     } else {
-      next(4);
+      next("afterQuiz");
     }
   } else {
-    alert("Kamu salah 😝");
+    alert("Salah 😝");
   }
 }
 
 // ===== FOTO =====
-let photos = [
-  {img:"foto1.jpg", text:"First pap uwu miror ❤️"},
-  {img:"foto2.jpg", text:"Pap paling imupp 💕"},
-  {img:"foto3.jpg", text:"First pap nakal 😍"},
-  {img:"foto4.jpg", text:"Most uwu filter ❤️"}
-];
-
+let photos = ["foto1.jpg","foto2.jpg","foto3.jpg","foto4.jpg"];
 let p = 0;
 
 function showPhotos(){
-  photoBox.innerHTML = "";
+  let box = document.getElementById("photoBox");
+  box.innerHTML = "";
+  p = 0;
+
+  function nextPhoto(){
+    if(p < photos.length){
+      box.innerHTML += `<img src="${photos[p]}">`;
+      p++;
+      setTimeout(nextPhoto, 1500);
+    }
+  }
+
   nextPhoto();
 }
 
-function nextPhoto(){
-  if(p < photos.length){
-    photoBox.innerHTML += `<img src="${photos[p].img}"><p>${photos[p].text}</p>`;
-    p++;
-    setTimeout(nextPhoto, 1200);
-  }
-}
-
-// ===== TYPING 2 =====
-let text2 = "sayaaangg di hari spesial kita ini, aku ingin kamu mengetahui satu hal...\n\n" +
-
-"semua yg aku lakukan ke kamu, aku lakukan demi hubungan kita.\n\n" +
-
-"maybe memang terkadang caraku kurang tepat, tapi aku selalu berharap bahwa aku bukan hanya menjadi teman ngobrol, aku berharap aku bisa menjadi pembimbing yg baik buat kamu, bisa menjadi pemimpin yg baik buat kamu.\n\n" +
-
-"semua itu aku lakukan untuk kebaikan hubungan kita kedepannya ❤️\n\n" +
-
+// ===== TEXT 2 =====
+let text2 = "sayaaangg di hari spesial kita ini, aku ingin kamu mengetahui satu hal, semua yg aku lakukan ke kamu, aku lakukan demi hubungan kita, maybe memang terkadang caraku kurang tepat, tapi aku selalu berharap bahwa aku bukan hanya menjadi teman ngobrol, aku berharap aku bisa menjadi pembimbing yg baik buat kamu, bisa menjadi pemimpin yg baik buat kamu, semua itu aku lakukan untuk kebaikan hubungan kita kedepannya\n\n" +
 "two years isn't enough, aku ingin lebih lama lagi bersama kamu, still to be mine dan kita jaga hubungan ini selama lamanya ya sayaaanggg _<\n\n" +
-
 "I LOVE UUUUUU 💗💗💗💗💗💗💗💗💗";
-let j = 0;
 
+let j = 0;
 function type2(){
   if(j < text2.length){
     typing2.innerHTML += text2[j];
@@ -262,20 +225,20 @@ function type2(){
   }
 }
 
-// ===== LOVE =====
+// ===== HEART =====
 function createHeart(){
-  let h = document.createElement("div");
-  h.className = "heart";
-  h.innerHTML = "💖";
-  h.style.left = Math.random()*100+"vw";
-  h.style.animationDuration = (3+Math.random()*5)+"s";
-  document.body.appendChild(h);
-
-  setTimeout(()=>h.remove(),8000);
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random()*100+"vw";
+  heart.style.fontSize = (15+Math.random()*20)+"px";
+  heart.style.animationDuration = (3+Math.random()*5)+"s";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),8000);
 }
 setInterval(createHeart, 500);
 
 </script>
 
 </body>
-</html>
+  </html>
