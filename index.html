@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Untuk Kamu ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(to right, #ff758c, #ff7eb3);
+  color: white;
+  text-align: center;
+}
+
+.container {
+  padding: 30px;
+}
+
+button {
+  padding: 12px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+img {
+  width: 250px;
+  border-radius: 15px;
+  margin-top: 15px;
+}
+</style>
+
+</head>
+<body>
+
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+<!-- STEP 1 -->
+<div id="start">
+  <h1>Tap 💖</h1>
+  <button onclick="start()">Tap</button>
+</div>
+
+<!-- STEP 2 -->
+<div id="message1" class="hidden">
+  <p id="typing1"></p>
+  <button onclick="toQuiz()">Aku sudah membaca</button>
+</div>
+
+<!-- STEP 4 QUIZ -->
+<div id="quiz" class="hidden">
+  <p id="question"></p>
+  <div id="answers"></div>
+</div>
+
+<!-- STEP 8 -->
+<div id="smart" class="hidden">
+  <button onclick="showPhotos()">Aku pinter 😆</button>
+</div>
+
+<!-- STEP 9 FOTO -->
+<div id="photos" class="hidden">
+  <div id="photoBox"></div>
+  <button onclick="afterPhotos()">Aku sudah liat</button>
+</div>
+
+<!-- STEP 12 -->
+<div id="message2" class="hidden">
+  <p id="typing2"></p>
+  <button onclick="end()">Okeee 💖</button>
+</div>
+
+<!-- END -->
+<div id="end" class="hidden">
+  <h2>Terima kasih sudah ada di hidupku ❤️</h2>
+</div>
+
+</div>
+
+<script>
+
+// STEP 2 TEXT
+let text1 = ">_< HAPPY ANNIVERSARY 2nd SAYAANGG >_<
+
+actually aku ga menyangka bgtt kita bisa sejauh ini, two years is a very long time, bukan hal mudah untuk kita sampai di titik ini, titik dimana kita benar benar sudah melewati banyak hal, happyness,sadness, dan emosional yg kita lalui bersama, 2 tahun bukanlah waktu yg sebentar, kita menghabiskan banyak energi untuk saling memahami masing-masing, dan alangkah beruntungnya kita, kita bisa melalui segala halang rintang yg harus jadi kendala
+I wish, setelah kita mencapai titik ini, kita menjadi lebih kuat, lebih saling memegang erat
+
+I hope, setelah banyak fase yg kita lalui, kita bisa belajar banyak hal, bagaimana cara menyikapi kesalah pahaman yg masing masing kita perbuat 
+
+i want, we are still together, aku berharap bgtt apa yg kita mulai, akan berakhir dengan apa yg kita inginkan";
+let i = 0;
+
+function typeText() {
+  if (i < text1.length) {
+    document.getElementById("typing1").innerHTML += text1.charAt(i);
+    i++;
+    setTimeout(typeText, 50);
+  }
+}
+
+function start() {
+  document.getElementById("start").style.display = "none";
+  document.getElementById("message1").style.display = "block";
+  document.getElementById("music").play();
+  typeText();
+}
+
+// QUIZ DATA
+let quizData = [
+  {
+    q: "Tanggal jadian kita?",
+    a: ["1 Jan", "14 Feb", "10 Mar"],
+    c: 1
+  },
+  {
+    q: "Tempat pertama kita ketemu?",
+    a: ["telegram", "whatsapp", "instagram"],
+    c: 0
+  },
+  {
+    q: "platform 2 tahun ini dimulai",
+    a: ["telegram", "whatsapp", "michat"],
+    c: 2
+  },
+  {
+    q: "Siapa paling sayang?",
+    a: ["Aku", "Kamu", "Kita ❤️"],
+    c: 2
+  },
+  {
+    q: "Aku itu apa buat kamu?",
+    a: ["Teman", "Pacar", "Segalanya ❤️"],
+    c: 2
+  }
+];
+
+let current = 0;
+
+function toQuiz() {
+  document.getElementById("message1").style.display = "none";
+  document.getElementById("quiz").style.display = "block";
+  loadQuiz();
+}
+
+function loadQuiz() {
+  let q = quizData[current];
+  document.getElementById("question").innerText = q.q;
+
+  let html = "";
+  q.a.forEach((ans, i) => {
+    html += `<button onclick="answer(${i})">${ans}</button>`;
+  });
+
+  document.getElementById("answers").innerHTML = html;
+}
+
+function answer(i) {
+  if (i === quizData[current].c) {
+    current++;
+    if (current < quizData.length) {
+      loadQuiz();
+    } else {
+      document.getElementById("quiz").style.display = "none";
+      document.getElementById("smart").style.display = "block";
+    }
+  } else {
+    alert("Kamu salah 😝");
+  }
+}
+
+// FOTO
+let photos = [
+  {img:"foto1.jpg", text:"First pap most ututututu"},
+  {img:"foto2.jpg", text:"first pap paling imupp seduniaaa"},
+  {img:"foto3.jpg", text:"first pap paling nackaall"},
+  {img:"foto4.jpg", text:"fist fav pap dari kamuu"}
+];
+
+let p = 0;
+
+function showPhotos() {
+  document.getElementById("smart").style.display = "none";
+  document.getElementById("photos").style.display = "block";
+  nextPhoto();
+}
+
+function nextPhoto() {
+  if (p < photos.length) {
+    let box = document.getElementById("photoBox");
+    box.innerHTML += `
+      <img src="${photos[p].img}">
+      <p>${photos[p].text}</p>
+    `;
+    p++;
+    setTimeout(nextPhoto, 1500);
+  }
+}
+
+// STEP 12 TEXT
+let text2 = "sayaaangg di hari spesial kita ini, aku ingin kamu mengetahui satu hal, semua yg aku lakukan ke kamu, aku lakukan demi hubungan kita, maybe memang terkadang caraku kurang tepat, tapi aku selalu berharap bahwa aku bukan hanya menjadi teman ngobrol, aku berharap aku bisa menjadi pembimbing yg baik buat kamu, bisa menjadi pemimpin yg baik buat kamu, semua itu aku lakukan untuk kebaikan hubungan kita kedepannya 
+
+two years is'nt enough, aku ingin lebih lama lagi bersama kamu, still to be mine dan kita jaga hubungan ini selama lamanya ya sayaaanggg _<  
+
+I LOVE UUUUUU💗💗💗💗💗💗💗💗💗";
+let j = 0;
+
+function afterPhotos() {
+  document.getElementById("photos").style.display = "none";
+  document.getElementById("message2").style.display = "block";
+  typeText2();
+}
+
+function typeText2() {
+  if (j < text2.length) {
+    document.getElementById("typing2").innerHTML += text2.charAt(j);
+    j++;
+    setTimeout(typeText2, 50);
+  }
+}
+
+function end() {
+  document.getElementById("message2").style.display = "none";
+  document.getElementById("end").style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
