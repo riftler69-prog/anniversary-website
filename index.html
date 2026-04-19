@@ -7,11 +7,22 @@
 <style>
 body {
   font-family: Arial;
-  background: pink;
+  background: linear-gradient(to right, #ff758c, #ff7eb3);
   text-align: center;
+  color: white;
+  padding: 20px;
 }
-.hidden {
-  display: none;
+.hidden { display: none; }
+button {
+  padding: 10px 20px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 10px;
+}
+img {
+  width: 250px;
+  border-radius: 15px;
+  margin-top: 10px;
 }
 </style>
 
@@ -22,38 +33,158 @@ body {
   <source src="music.mp3">
 </audio>
 
+<!-- STEP 1 -->
 <div id="start">
   <h1>Tap ❤️</h1>
-  <button onclick="start()">Tap</button>
+  <button onclick="startApp()">Tap</button>
 </div>
 
+<!-- STEP 2 -->
 <div id="message1" class="hidden">
   <p id="typing1"></p>
-  <button onclick="toQuiz()">Aku sudah membaca</button>
+  <button onclick="startQuiz()">Aku sudah membaca</button>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz" class="hidden">
+  <p id="question"></p>
+  <div id="answers"></div>
+</div>
+
+<!-- STEP 8 -->
+<div id="afterQuiz" class="hidden">
+  <button onclick="showPhotos()">Aku pinter 😆</button>
+</div>
+
+<!-- FOTO -->
+<div id="photos" class="hidden">
+  <div id="photoBox"></div>
+  <button onclick="afterPhotos()">Aku sudah liat</button>
+</div>
+
+<!-- PESAN AKHIR -->
+<div id="message2" class="hidden">
+  <p id="typing2"></p>
+  <button onclick="endApp()">Okeee ❤️</button>
+</div>
+
+<!-- END -->
+<div id="end" class="hidden">
+  <h2>Aku sayang kamu ❤️</h2>
 </div>
 
 <script>
 
-let text = "Aku sayang kamu ❤️";
-let i = 0;
-
-function start() {
+// ===== START =====
+function startApp() {
   document.getElementById("start").style.display = "none";
   document.getElementById("message1").style.display = "block";
   document.getElementById("music").play();
-  typeText();
+  type1();
 }
 
-function typeText() {
-  if (i < text.length) {
-    document.getElementById("typing1").innerHTML += text.charAt(i);
+// ===== TYPING 1 =====
+let text1 = "Selamat 2 tahun ya... aku bersyukur punya kamu ❤️";
+let i = 0;
+
+function type1() {
+  if (i < text1.length) {
+    document.getElementById("typing1").innerHTML += text1[i];
     i++;
-    setTimeout(typeText, 50);
+    setTimeout(type1, 50);
   }
 }
 
-function toQuiz() {
-  alert("Next step nanti kita lanjut 😄");
+// ===== QUIZ =====
+let quiz = [
+  {q:"Tanggal jadian kita?", a:["1 Jan","14 Feb","10 Mar"], c:1},
+  {q:"Tempat pertama ketemu?", a:["Sekolah","Cafe","Mall"], c:0},
+  {q:"Makanan favorit?", a:["Bakso","Ayam","Mie"], c:2},
+  {q:"Siapa paling sayang?", a:["Aku","Kamu","Kita ❤️"], c:2},
+  {q:"Aku itu apa?", a:["Teman","Pacar","Segalanya ❤️"], c:2}
+];
+
+let current = 0;
+
+function startQuiz() {
+  document.getElementById("message1").style.display = "none";
+  document.getElementById("quiz").style.display = "block";
+  loadQuiz();
+}
+
+function loadQuiz() {
+  let q = quiz[current];
+  document.getElementById("question").innerText = q.q;
+
+  let html = "";
+  q.a.forEach((ans, i) => {
+    html += `<button onclick="answer(${i})">${ans}</button>`;
+  });
+
+  document.getElementById("answers").innerHTML = html;
+}
+
+function answer(i) {
+  if (i === quiz[current].c) {
+    current++;
+    if (current < quiz.length) {
+      loadQuiz();
+    } else {
+      document.getElementById("quiz").style.display = "none";
+      document.getElementById("afterQuiz").style.display = "block";
+    }
+  } else {
+    alert("Kamu salah 😝");
+  }
+}
+
+// ===== FOTO =====
+let photos = [
+  {img:"foto1.jpg", text:"Kenangan kita ❤️"},
+  {img:"foto2.jpg", text:"Moment bahagia 💕"},
+  {img:"foto3.jpg", text:"Aku suka ini 😍"},
+  {img:"foto4.jpg", text:"Favoritku ❤️"}
+];
+
+let p = 0;
+
+function showPhotos() {
+  document.getElementById("afterQuiz").style.display = "none";
+  document.getElementById("photos").style.display = "block";
+  nextPhoto();
+}
+
+function nextPhoto() {
+  if (p < photos.length) {
+    document.getElementById("photoBox").innerHTML +=
+      `<img src="${photos[p].img}"><p>${photos[p].text}</p>`;
+    p++;
+    setTimeout(nextPhoto, 1500);
+  }
+}
+
+// ===== PESAN AKHIR =====
+let text2 = "Terima kasih sudah bertahan sejauh ini ❤️";
+let j = 0;
+
+function afterPhotos() {
+  document.getElementById("photos").style.display = "none";
+  document.getElementById("message2").style.display = "block";
+  type2();
+}
+
+function type2() {
+  if (j < text2.length) {
+    document.getElementById("typing2").innerHTML += text2[j];
+    j++;
+    setTimeout(type2, 50);
+  }
+}
+
+// ===== END =====
+function endApp() {
+  document.getElementById("message2").style.display = "none";
+  document.getElementById("end").style.display = "block";
 }
 
 </script>
