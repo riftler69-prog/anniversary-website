@@ -10,7 +10,7 @@ body {
   background: linear-gradient(to right, #ff758c, #ff7eb3);
   text-align: center;
   color: white;
-  padding: 20px;
+  margin: 0;
 }
 
 /* BIAR RAPI DI HP */
@@ -35,15 +35,21 @@ p {
   align-items: center;
   height: 100vh;
   flex-direction: column;
+  animation: fadeIn 1s ease;text-align: center;
   }
-.center {
-  animation: fadeIn 1s ease;
-}
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+  body > div {
+  position: relative;
+  z-index: 1;
+  }
+  .center p {
+  max-width: 600px;
+  padding: 20px;
+  }
 /* TOMBOL */
 button {
   padding: 15px 25px;
