@@ -192,8 +192,12 @@ function answer(i){
 }
 
 // ===== FOTO =====
-let photos = ["foto1.jpg","foto2.jpg","foto3.jpg","foto4.jpg"];
-let p = 0;
+let photos = [
+  {img:"foto1.jpg", text:"first pap uwu ❤️"},
+  {img:"foto2.jpg", text:"pap paling imup 💕"},
+  {img:"foto3.jpg", text:"first pap nakal 😍"},
+  {img:"foto4.jpg", text:"filter paling cans ❤️"}
+];
 
 function showPhotos(){
   let box = document.getElementById("photoBox");
@@ -202,7 +206,10 @@ function showPhotos(){
 
   function nextPhoto(){
     if(p < photos.length){
-      box.innerHTML += `<img src="${photos[p]}">`;
+      box.innerHTML += `
+  <img src="${photos[p].img}">
+  <p>${photos[p].text}</p>
+`;
       p++;
       setTimeout(nextPhoto, 1500);
     }
