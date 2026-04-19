@@ -132,10 +132,17 @@ img {
 
 // PINDAH STEP
 function next(n) {
-  document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
-  document.getElementById("step"+n).classList.add("active");
+  document.querySelectorAll(".step").forEach(s => {
+    s.classList.remove("active");
+  });
 
+  const target = document.getElementById("step" + n);
+  target.classList.add("active");
+
+  // RESET TYPING BIAR GA KOSONG
   if(n === 2){
+    document.getElementById("typing1").innerHTML = "";
+    i = 0;
     document.getElementById("music").play();
     type1();
   }
@@ -149,6 +156,8 @@ function next(n) {
   }
 
   if(n === 6){
+    document.getElementById("typing2").innerHTML = "";
+    j = 0;
     type2();
   }
 }
